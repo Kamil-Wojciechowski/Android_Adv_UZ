@@ -1,6 +1,9 @@
 package com.example.swiatzwierzat.configuration;
 
+import android.content.SharedPreferences;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -16,16 +19,31 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-public class BackendConfig{
+@Getter
+@Setter
+@NoArgsConstructor
+public class BackendConfig extends Concurent {
     private static String url = "https://app-web-uz.herokuapp.com/api/v1";
     private static String host = "app-web-uz.herokuapp.com:443";
+    private static String email = "";
+    private static String password = "";
     private static String token = "";
     private static String refreshToken = "";
     private static boolean isLogged = false;
 
-    public BackendConfig(String email, String password) {
+    public static void setEmail(String email) {
+        BackendConfig.email = email;
+    }
+
+    public static void setPassword(String password) {
+        BackendConfig.password = password;
+    }
+
+    public static boolean login() {
         AndroidNetworking.post(url + "/login")
                 .addBodyParameter("email", email)
                 .addBodyParameter("password", password)
@@ -51,6 +69,8 @@ public class BackendConfig{
                         isLogged = false;
                     }
                 });
+
+        return isLogged;
     }
 
     public static boolean isValid() {
