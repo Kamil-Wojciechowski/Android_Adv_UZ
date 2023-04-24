@@ -7,15 +7,14 @@ public class BackendConfig {
     private static String token = "";
     private static String refreshToken = "";
     private static boolean isLogged = false;
-    private static SharedPreferences sharedPreferences;
-    private static SharedPreferences.Editor editor;
+    private static String sharedPreferenceName = "SHARED_PREF";
+
 
     public static String getToken() {
         return token;
     }
 
     public static void setToken(String token) {
-        editor.putString("token", token);
         BackendConfig.token = token;
     }
 
@@ -28,12 +27,7 @@ public class BackendConfig {
     }
 
     public static void setRefreshToken(String refreshToken) {
-        editor.putString("refreshToken", refreshToken);
         BackendConfig.refreshToken = refreshToken;
-    }
-
-    public static void setSharedPreferences(SharedPreferences sharedPreferences) {
-        BackendConfig.sharedPreferences = sharedPreferences;
     }
 
     public static boolean isIsLogged() {
@@ -42,5 +36,9 @@ public class BackendConfig {
 
     public static void setIsLogged(boolean isLogged) {
         BackendConfig.isLogged = isLogged;
+    }
+
+    public static String getSharedPreferenceName() {
+        return sharedPreferenceName;
     }
 }

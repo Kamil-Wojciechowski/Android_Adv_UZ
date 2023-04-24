@@ -6,4 +6,22 @@
     <string name="register">Register</string>
     <string name="forget">Forget?</string>
     <string name="preference_file_key">file_key</string>
+    <string name="confirmedPassword">Confirmed Password</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="back">Back</string>
+    <string name="registered">Please check email!</string>
+    <string name="credentials_login_error">Credentials seems wrong! Please try again.</string>
+    <string name="credentials_login">Correctly logged in!</string>
+    <string name="register_firstname_error_empty">Firstname missing!</string>
+    <string name="register_firstname_error_min_length">Firstname is to short!</string>
+    <string name="register_lastname_error_empty">Lastname missing!</string>
+    <string name="register_lastname_error_min_length">Lastname is to short!</string>
+    <string name="register_email_error_empty">Email missing!</string>
+    <string name="register_email_wrong_type">Email is wrong!</string>
+    <string name="register_password_wrong_min_length">Password it too short. Minimum 8 characters!</string>
+    <string name="register_password_not_equal">Password is not the same!</string>
+    <string name="global_something_went_wrong">Something went wrong! Please try again later!</string>
+    <string name="forget_success">Please check email!</string>
+    <string name="send">Send</string>
 </resources>
