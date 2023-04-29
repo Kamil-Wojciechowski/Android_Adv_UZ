@@ -1,11 +1,10 @@
 package com.example.swiatzwierzat;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class ProductsActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
+public class ProductsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

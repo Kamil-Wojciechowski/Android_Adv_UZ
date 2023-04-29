@@ -31,4 +31,6 @@
     <string name="fingerprint_cancel">Cancel</string>
 
     <string name="notification_refresh_token_error">Couldn\'t refresh token, please use credentials to login</string>
+    <string name="notification_reminder_title">Buy something!</string>
+    <string name="notification_reminder_message">Remember to spend your money in our shop. Don\'t disappoint your pet!</string>
 </resources>

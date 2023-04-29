@@ -69,12 +69,20 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LibNotifications.askForNotificationPermissions(this);
         initializer(savedInstanceState);
 
         loginButton.setOnClickListener(this::onLogin);
         registerButton.setOnClickListener(this::onRegister);
         forgetButton.setOnClickListener(this::onForget);
         fingerprintButton.setOnClickListener(this::onBiometricLogin);
+
+        LibNotifications.startPeriodicalNotifications(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         if (credentialsSaved && LibBiometrics.canUseBiometrics(this)) {
             fingerprintButton.setVisibility(View.VISIBLE);
@@ -125,7 +133,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleBiometricLogin() {
+        this.toggleButtons(false, false);
         LibBiometrics.showBiometricsDialog(this, R.string.fingerprint_login_title, R.string.fingerprint_login_description, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+
+                LoginActivity.this.toggleButtons(errorCode != BiometricPrompt.ERROR_LOCKOUT, true);
+            }
+
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
@@ -156,6 +172,8 @@ public class LoginActivity extends AppCompatActivity {
                         BackendConfig.setToken(null);
                         BackendConfig.setRefreshToken(null);
                         BackendConfig.setIsLogged(false);
+
+                        LoginActivity.this.toggleButtons(false, true);
                     }
                 });
             }
@@ -170,5 +188,11 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(v.getContext(), ForgetPasswordActivity.class));
     }
 
+    private void toggleButtons(boolean isFingerprintEnabled, boolean isEnabled) {
+        fingerprintButton.setEnabled(isFingerprintEnabled);
+        forgetButton.setEnabled(isEnabled);
+        registerButton.setEnabled(isEnabled);
+        loginButton.setEnabled(isEnabled);
+    }
 
 }
