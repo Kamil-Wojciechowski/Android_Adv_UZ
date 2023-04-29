@@ -3,6 +3,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="button_login_with_fingerprint">Use fingerprint</string>
     <string name="register">Register</string>
     <string name="forget">Forget?</string>
     <string name="preference_file_key">file_key</string>
@@ -24,4 +25,10 @@
     <string name="global_something_went_wrong">Something went wrong! Please try again later!</string>
     <string name="forget_success">Please check email!</string>
     <string name="send">Send</string>
+
+    <string name="fingerprint_login_title">Authorization</string>
+    <string name="fingerprint_login_description">Login with biometrics to last signed account or cancel to change credentials</string>
+    <string name="fingerprint_cancel">Cancel</string>
+
+    <string name="notification_refresh_token_error">Couldn\'t refresh token, please use credentials to login</string>
 </resources>
