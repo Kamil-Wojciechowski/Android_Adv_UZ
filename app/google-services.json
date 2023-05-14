@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "17272528373",
+    "firebase_url": "https://animal-happy-project-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "animal-happy-project",
+    "storage_bucket": "animal-happy-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17272528373:android:b1250f5a6438dc5d1894bc",
+        "android_client_info": {
+          "package_name": "com.example.swiatzwierzat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17272528373-bbhicmjiklitrk11fpk9p4pad6phi8tc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAimznbdYlyW-F1cJmlffWBmSW71f7K3l4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17272528373-bbhicmjiklitrk11fpk9p4pad6phi8tc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
