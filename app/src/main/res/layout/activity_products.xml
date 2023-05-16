@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".ProductsActivity">
 
-    <GridView
-        android:id="@+id/gv_products_products"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+    <ListView
+        android:id="@+id/lv_products"
+        android:layout_width="380dp"
+        android:layout_height="689dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
