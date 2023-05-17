@@ -47,7 +47,7 @@ public class ProductsActivity extends AppCompatActivity {
     private void initializer(Bundle savedInstanceState) {
         sharedPreferences = getApplicationContext().getSharedPreferences(BackendConfig.getSharedPreferenceName(), Context.MODE_PRIVATE);
         if(sharedPreferences.getInt("user_address", 0) == 0) {
-            Toast.makeText(getApplicationContext(), R.string.provide_address, Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), R.string.provide_address, Toast.LENGTH_LONG).show();
             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         }
 

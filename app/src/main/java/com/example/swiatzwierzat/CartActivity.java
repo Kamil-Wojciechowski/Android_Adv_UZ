@@ -119,7 +119,7 @@ public class CartActivity extends AppCompatActivity {
 
                                 addItemsToOrder(orderId);
 
-                                Toast.makeText(getApplicationContext(), R.string.order_is_placed, Toast.LENGTH_LONG);
+                                Toast.makeText(getApplicationContext(), R.string.order_is_placed, Toast.LENGTH_LONG).show();
 
                                 JSONArray emptyArray = new JSONArray();
                                 shoppingCart.setValue(emptyArray.toString());
