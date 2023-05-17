@@ -140,11 +140,15 @@ public class ProductDetailActivity extends AppCompatActivity {
                 JSONObject object = new JSONObject();
                 object.put("id", product.getId());
                 object.put("name", product.getName());
+                object.put("available", product.getAvailable());
                 object.put("amount", 1);
 
                 shoppingCartInternal.put(object);
             }
+
+            Toast.makeText(getApplicationContext(), "Item added!", Toast.LENGTH_SHORT);
         } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), "Something went wrong! Please try again later", Toast.LENGTH_SHORT);
             throw new RuntimeException(e);
         }
 

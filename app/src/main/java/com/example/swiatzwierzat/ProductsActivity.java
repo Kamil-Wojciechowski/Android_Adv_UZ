@@ -1,11 +1,14 @@
 package com.example.swiatzwierzat;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,21 +31,34 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 public class ProductsActivity extends AppCompatActivity {
 
     private ListView listView;
+    private Button settings, cart;
     private FirebaseDatabase database;
     private DatabaseReference products;
 
     private BackendConfig backendConfig;
     private List<Product> productsArr;
+
+    private SharedPreferences sharedPreferences;
     private void initializer(Bundle savedInstanceState) {
+        sharedPreferences = getApplicationContext().getSharedPreferences(BackendConfig.getSharedPreferenceName(), Context.MODE_PRIVATE);
+        if(sharedPreferences.getInt("user_address", 0) == 0) {
+            Toast.makeText(getApplicationContext(), R.string.provide_address, Toast.LENGTH_LONG);
+            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+        }
+
         setContentView(R.layout.activity_products);
 
         listView = findViewById(R.id.lv_products);
+        settings = findViewById(R.id.bt_products_settings);
+        cart = findViewById(R.id.bt_products_cart);
+
+        settings.setOnClickListener(this::toSettings);
+        cart.setOnClickListener(this::toCart);
 
         database = FirebaseDatabase.getInstance();
         products = database.getReference("products");
@@ -111,12 +127,16 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.w("com.example.swiatzwierzat.firebase", "Failed to read value.", error.toException());
-                Toast.makeText(getApplicationContext() ,"Something went wrong. Please try again later!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext() ,R.string.global_something_went_wrong, Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    private void toSettings(View v) {
+        startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+    }
 
-
-
+    private void toCart(View v) {
+        startActivity(new Intent(getApplicationContext(), CartActivity.class));
+    }
 }

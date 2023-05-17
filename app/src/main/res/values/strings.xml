@@ -12,6 +12,9 @@
     <string name="lastname">Lastname</string>
     <string name="back">Back</string>
     <string name="registered">Please check email!</string>
+    <string name="address_created">Address created!</string>
+    <string name="address_updated">Address updated!</string>
+    <string name="provide_address">Please provide address for placing orders!</string>
     <string name="credentials_login_error">Credentials seems wrong! Please try again.</string>
     <string name="credentials_login">Correctly logged in!</string>
     <string name="register_firstname_error_empty">Firstname missing!</string>
@@ -22,9 +25,17 @@
     <string name="register_email_wrong_type">Email is wrong!</string>
     <string name="register_password_wrong_min_length">Password it too short. Minimum 8 characters!</string>
     <string name="register_password_not_equal">Password is not the same!</string>
+    <string name="register_phone_empty">Mobile phone needs to have minimum 9 digits!</string>
+    <string name="register_street_empty">Street can not be empty!</string>
+    <string name="register_city_empty">City can not be empty!</string>
+    <string name="order_is_placed">Order has been placed! To finalize check website!</string>
+    <string name="register_postal_code_empty">Postal code can not be empty!</string>
     <string name="global_something_went_wrong">Something went wrong! Please try again later!</string>
     <string name="forget_success">Please check email!</string>
     <string name="send">Send</string>
+    <string name="plus">Plus</string>
+    <string name="delete">Delete</string>
+    <string name="minus">Minus</string>
 
     <string name="fingerprint_login_title">Authorization</string>
     <string name="fingerprint_login_description">Login with biometrics to last signed account or cancel to change credentials</string>
@@ -42,4 +53,11 @@
     <string name="available">Available</string>
     <string name="price">Price</string>
     <string name="buy">Buy</string>
+    <string name="Mobile">Mobile Phone\n</string>
+    <string name="street">Street</string>
+    <string name="city">City</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="settings">Settings</string>
+    <string name="save">Save</string>
+    <string name="cart">Cart</string>
 </resources>
