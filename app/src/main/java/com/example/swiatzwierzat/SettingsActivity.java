@@ -1,12 +1,14 @@
 package com.example.swiatzwierzat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +33,15 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView inCity;
     private TextView inPostalCode;
 
+
+
     private Button save;
 
+    private Switch switch1;
+
     private SharedPreferences sharedPreferences;
+
+
 
     private void loadAddress() {
         addressId = sharedPreferences.getInt("user_address", 0);
@@ -79,7 +87,9 @@ public class SettingsActivity extends AppCompatActivity {
         inCity = findViewById(R.id.et_settings_city);
         inPostalCode = findViewById(R.id.et_settings_postal_code);
         save = findViewById(R.id.bt_settings_save);
+        switch1 = findViewById(R.id.sw_settings_theme);
         save.setOnClickListener(this::save);
+        switch1.setOnClickListener(this::changeTheme);
 
         sharedPreferences = getApplicationContext().getSharedPreferences(BackendConfig.getSharedPreferenceName(), Context.MODE_PRIVATE);
 
@@ -101,7 +111,7 @@ public class SettingsActivity extends AppCompatActivity {
             inLastname.setError(getResources().getString(R.string.register_lastname_error_empty));
             isValid = false;
         } else if(inLastname.length() < 2) {
-            inFirstname.setError(getResources().getString(R.string.register_lastname_error_min_length));
+            inLastname.setError(getResources().getString(R.string.register_lastname_error_min_length));
             isValid = false;
         }
 
@@ -133,6 +143,16 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         initializer();
+    }
+
+    private void changeTheme(View view){
+            if(!switch1.isChecked()){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+            } else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+            }
     }
 
     private void save(View view) {
