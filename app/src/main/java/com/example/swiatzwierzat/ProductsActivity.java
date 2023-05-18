@@ -36,7 +36,7 @@ import java.util.List;
 public class ProductsActivity extends AppCompatActivity {
 
     private ListView listView;
-    private Button settings, cart;
+    private Button settings, cart, location;
     private FirebaseDatabase database;
     private DatabaseReference products;
 
@@ -56,9 +56,11 @@ public class ProductsActivity extends AppCompatActivity {
         listView = findViewById(R.id.lv_products);
         settings = findViewById(R.id.bt_products_settings);
         cart = findViewById(R.id.bt_products_cart);
+        location = findViewById(R.id.bt_maps);
 
         settings.setOnClickListener(this::toSettings);
         cart.setOnClickListener(this::toCart);
+        location.setOnClickListener(this::toMaps);
 
         database = FirebaseDatabase.getInstance();
         products = database.getReference("products");
@@ -138,5 +140,9 @@ public class ProductsActivity extends AppCompatActivity {
 
     private void toCart(View v) {
         startActivity(new Intent(getApplicationContext(), CartActivity.class));
+    }
+
+    private void toMaps(View v) {
+        startActivity(new Intent(getApplicationContext(), MapsActivity.class));
     }
 }
