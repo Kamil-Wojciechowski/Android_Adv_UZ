@@ -30,6 +30,7 @@
     <string name="register_city_empty">City can not be empty!</string>
     <string name="order_is_placed">Order has been placed! To finalize check website!</string>
     <string name="register_postal_code_empty">Postal code can not be empty!</string>
+    <string name="register_postal_code_wrong_format">Postal code wrong format! Example: ##-###</string>
     <string name="global_something_went_wrong">Something went wrong! Please try again later!</string>
     <string name="forget_success">Please check email!</string>
     <string name="send">Send</string>

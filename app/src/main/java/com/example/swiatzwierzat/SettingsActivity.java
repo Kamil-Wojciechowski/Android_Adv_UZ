@@ -21,6 +21,9 @@ import com.example.swiatzwierzat.configuration.BackendConfig;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private BackendConfig backendConfig;
@@ -130,8 +133,13 @@ public class SettingsActivity extends AppCompatActivity {
             isValid = false;
         }
 
+        Pattern pattern = Pattern.compile("^[0-9]{2}-[0-9]{3}");
+
         if(inPostalCode.length() == 0) {
             inPostalCode.setError(getResources().getString(R.string.register_postal_code_empty));
+            isValid = false;
+        } else if (!pattern.matcher(inPostalCode.getText()).matches()) {
+            inPostalCode.setError(getResources().getString(R.string.register_postal_code_wrong_format));
             isValid = false;
         }
 
