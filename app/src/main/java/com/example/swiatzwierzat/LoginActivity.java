@@ -152,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                         BackendConfig.setIsLogged(true);
 
                         try {
-                            BackendConfig.setToken(response.getString("access_token"));
+                            BackendConfig.setToken("Bearer " + response.getString("access_token"));
                             BackendConfig.setRefreshToken(response.getString("refresh_token"));
 
                             SharedPreferences.Editor editor = sharedPreferences.edit();
