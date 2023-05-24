@@ -1,10 +1,6 @@
 package com.example.swiatzwierzat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,7 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.swiatzwierzat.configuration.BackendConfig;
+import com.example.swiatzwierzat.library.LibNotifications;
 import com.example.swiatzwierzat.model.Product;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -85,7 +85,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String value = snapshot.getValue(String.class);
-                if(value != null && !value.isBlank()) {
+                if (value != null && !value.isBlank()) {
                     try {
                         shoppingCartInternal = new JSONArray(value);
                     } catch (JSONException e) {
@@ -97,7 +97,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w("com.example.swiatzwierzat.firebase", "Failed to read value.", error.toException());
-                Toast.makeText(getApplicationContext() ,"Something went wrong. Please try again later!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Something went wrong. Please try again later!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -110,7 +110,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         available.setText(product.getAvailable().toString());
         price.setText(product.getPrice().toString());
 
-        String cleanImage = product.getImage().replace("data:image/png;base64,", "").replace("data:image/jpeg;base64,","");
+        String cleanImage = product.getImage().replace("data:image/png;base64,", "").replace("data:image/jpeg;base64,", "");
         byte[] decodedString = Base64.decode(cleanImage, Base64.DEFAULT);
         Bitmap decodedBytes = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         productImage.setImageBitmap(decodedBytes);
@@ -118,13 +118,13 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void onBuy(View v) {
         Boolean found = false;
-        for(int i = 0; i < shoppingCartInternal.length(); i++) {
+        for (int i = 0; i < shoppingCartInternal.length(); i++) {
             try {
                 JSONObject obj = shoppingCartInternal.getJSONObject(i);
 
                 if (product.getId() == obj.getInt("id")) {
                     int toBuy = obj.getInt("amount");
-                    if(product.getAvailable() >= toBuy) {
+                    if (product.getAvailable() >= toBuy) {
                         obj.put("amount", toBuy + 1);
                     }
 
@@ -146,9 +146,9 @@ public class ProductDetailActivity extends AppCompatActivity {
                 shoppingCartInternal.put(object);
             }
 
-            Toast.makeText(getApplicationContext(), "Item added!", Toast.LENGTH_SHORT);
+            LibNotifications.sendNotification(this, R.string.notification_cart_item_added_title, R.string.notification_cart_item_added_message);
         } catch (JSONException e) {
-            Toast.makeText(getApplicationContext(), "Something went wrong! Please try again later", Toast.LENGTH_SHORT);
+            LibNotifications.sendToast(this, R.string.notification_error_unknown);
             throw new RuntimeException(e);
         }
 

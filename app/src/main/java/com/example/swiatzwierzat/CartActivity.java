@@ -161,7 +161,7 @@ public class CartActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), R.string.global_something_went_wrong, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), R.string.register_postal_code_wrong_format, Toast.LENGTH_LONG).show();
                         }
                     });
 

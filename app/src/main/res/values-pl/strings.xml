@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Świat Zwierząt</string>
+    <string name="email">Email</string>
+    <string name="password">Hasło</string>
+    <string name="login">Logowanie</string>
+    <string name="button_login_with_fingerprint">Użyj odcisku palca</string>
+    <string name="register">Rejestracja</string>
+    <string name="forget">Odzyskiwanie</string>
+    <string name="preference_file_key">file_key</string>
+    <string name="confirmedPassword">Potwierdź hasło</string>
+    <string name="firstname">Imię</string>
+    <string name="lastname">Nazwisko</string>
+    <string name="back">Powrót</string>
+    <string name="registered">Sprawdź swoją skrzynkę</string>
+    <string name="address_created">Adres został zapisany!</string>
+    <string name="address_updated">Adres został edytowany!</string>
+    <string name="provide_address">Podaj adres w celu składania zamówień!</string>
+    <string name="credentials_login_error">Dane logowania są niepoprawne, spróbuj ponownie.</string>
+    <string name="credentials_login">Zalogowano!</string>
+    <string name="register_firstname_error_empty">Imię nie może być puste!</string>
+    <string name="register_firstname_error_min_length">Imię jest za krótkie!</string>
+
+    <string name="register_lastname_error_empty">Nazwisko nie może być puste!</string>
+    <string name="register_lastname_error_min_length">Nazwisko jest za krótkie!</string>
+    <string name="register_email_error_empty">Email nie może być pusty!</string>
+    <string name="register_email_wrong_type">Email jest niepoprawny!</string>
+    <string name="register_password_wrong_min_length">Hasło jest za krótkie - minimum 8 znaków!</string>
+    <string name="register_password_not_equal">Hasła nie są takie same!</string>
+    <string name="register_phone_empty">Numer telefonu ma min. 9 cyfr!</string>
+    <string name="register_street_empty">Ulica nie może być pusta!</string>
+    <string name="register_city_empty">Miasto nie może być puste!</string>
+    <string name="order_is_placed">Zamówienie zostało złożone, odwiedź naszą stronę!</string>
+    <string name="register_postal_code_empty">Kod pocztowy nie może być pusty!</string>
+    <string name="register_postal_code_wrong_format">Zły format kodu pocztowego! Przykład: ##-###</string>
+    <string name="global_something_went_wrong">Coś poszło nie tak! Spróbuj ponownie</string>
+    <string name="forget_success">Sprawdź skrzynkę!</string>
+    <string name="send">Wyślij</string>
+    <string name="plus">Plus</string>
+    <string name="delete">Usuń</string>
+    <string name="minus">Minus</string>
+
+    <string name="fingerprint_login_title">Logowanie</string>
+    <string name="fingerprint_login_description">Zaloguj się za pomocą biometrii lub anuluj w celu zmiany konta</string>
+    <string name="fingerprint_cancel">Anuluj</string>
+
+    <string name="notification_refresh_token_error">Zaloguj się ponownie</string>
+    <string name="notification_reminder_title">Kup coś!</string>
+    <string name="notification_reminder_message">Nie zawiedź swojego zwierzaka! Kup coś u nas!</string>
+    <string name="notification_cart_item_added_title">Koszyk</string>
+    <string name="notification_cart_item_added_message">Dodano do koszyka</string>
+    <string name="notification_error_unknown">Coś poszło nie tak! Spróbuj ponownie</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Pusty fragment</string>
+    <string name="title_activity_product_detail">Szczegóły produktu</string>
+    <string name="product_name">Nazwa</string>
+    <string name="description">Opis</string>
+    <string name="productTag">Tag</string>
+    <string name="available">Dostępne: </string>
+    <string name="price">Cena</string>
+    <string name="buy">Kup</string>
+    <string name="Mobile">Telefon</string>
+    <string name="street">Ulica</string>
+    <string name="city">Miasto</string>
+    <string name="postal_code">Kod pocztowy</string>
+    <string name="settings">Ustawienia</string>
+    <string name="save">Zapisz</string>
+    <string name="cart">Koszyk</string>
+    <string name="title_activity_maps">Mapy</string>
+    <string name="darkmode">Ciemny motyw</string>
+    <string name="store_location">Lokalizacja sklepu</string>
+</resources>
