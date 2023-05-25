@@ -1,8 +1,5 @@
 package com.example.swiatzwierzat;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +8,9 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Method;
@@ -21,12 +21,9 @@ import com.example.swiatzwierzat.configuration.BackendConfig;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SettingsActivity extends AppCompatActivity {
-
-    private BackendConfig backendConfig;
 
     private Integer addressId;
     private TextView inFirstname;
@@ -37,7 +34,6 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView inPostalCode;
 
 
-
     private Button save;
 
     private Switch switch1;
@@ -45,13 +41,12 @@ public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
 
-
     private void loadAddress() {
         addressId = sharedPreferences.getInt("user_address", 0);
 
-        if(addressId != 0) {
-            AndroidNetworking.get(backendConfig.getUrl() + "/addresses/" + addressId)
-                    .addHeaders("Authorization", backendConfig.getToken())
+        if (addressId != 0) {
+            AndroidNetworking.get(BackendConfig.getUrl() + "/addresses/" + addressId)
+                    .addHeaders("Authorization", BackendConfig.getToken())
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
@@ -102,40 +97,40 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean isFieldsValid() {
         boolean isValid = true;
 
-        if(inFirstname.length() == 0) {
+        if (inFirstname.length() == 0) {
             inFirstname.setError(getResources().getString(R.string.register_firstname_error_empty));
             isValid = false;
-        } else if(inFirstname.length() < 2) {
+        } else if (inFirstname.length() < 2) {
             inFirstname.setError(getResources().getString(R.string.register_firstname_error_min_length));
             isValid = false;
         }
 
-        if(inLastname.length() == 0) {
+        if (inLastname.length() == 0) {
             inLastname.setError(getResources().getString(R.string.register_lastname_error_empty));
             isValid = false;
-        } else if(inLastname.length() < 2) {
+        } else if (inLastname.length() < 2) {
             inLastname.setError(getResources().getString(R.string.register_lastname_error_min_length));
             isValid = false;
         }
 
-        if(inMobilePhone.length() < 8) {
+        if (inMobilePhone.length() < 8) {
             inMobilePhone.setError(getResources().getString(R.string.register_phone_empty));
             isValid = false;
         }
 
-        if(inStreet.length() == 0) {
+        if (inStreet.length() == 0) {
             inStreet.setError(getResources().getString(R.string.register_street_empty));
             isValid = false;
         }
 
-        if(inCity.length() == 0) {
+        if (inCity.length() == 0) {
             inCity.setError(getResources().getString(R.string.register_city_empty));
             isValid = false;
         }
 
         Pattern pattern = Pattern.compile("^[0-9]{2}-[0-9]{3}");
 
-        if(inPostalCode.length() == 0) {
+        if (inPostalCode.length() == 0) {
             inPostalCode.setError(getResources().getString(R.string.register_postal_code_empty));
             isValid = false;
         } else if (!pattern.matcher(inPostalCode.getText()).matches()) {
@@ -153,72 +148,72 @@ public class SettingsActivity extends AppCompatActivity {
         initializer();
     }
 
-    private void changeTheme(View view){
-            if(!switch1.isChecked()){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    private void changeTheme(View view) {
+        if (!switch1.isChecked()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-            } else{
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-            }
+        }
     }
 
     private void save(View view) {
-        if(isFieldsValid()) {
-            JSONObject address = null;
+        if (isFieldsValid()) {
+            JSONObject address;
             try {
                 address = new JSONObject()
-                   .put("firstname", inFirstname.getText().toString())
-                   .put("lastname", inLastname.getText().toString())
-                   .put("mobileNumber", inMobilePhone.getText().toString())
-                   .put("street", inStreet.getText().toString())
-                   .put("postalCode", inPostalCode.getText().toString())
-                   .put("city", inCity.getText().toString());
+                        .put("firstname", inFirstname.getText().toString())
+                        .put("lastname", inLastname.getText().toString())
+                        .put("mobileNumber", inMobilePhone.getText().toString())
+                        .put("street", inStreet.getText().toString())
+                        .put("postalCode", inPostalCode.getText().toString())
+                        .put("city", inCity.getText().toString());
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
 
-            int method = 0;
-            String url = null;
-            if(addressId == 0) {
+            int method;
+            String url;
+            if (addressId == 0) {
                 method = Method.POST;
-                url = backendConfig.getUrl() + "/addresses";
+                url = BackendConfig.getUrl() + "/addresses";
             } else {
                 method = Method.PATCH;
-                url = backendConfig.getUrl() + "/addresses/" + addressId;
+                url = BackendConfig.getUrl() + "/addresses/" + addressId;
             }
 
             AndroidNetworking.request(url, method)
-                    .addHeaders("Authorization", backendConfig.getToken())
+                    .addHeaders("Authorization", BackendConfig.getToken())
                     .addJSONObjectBody(address)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                if(addressId != 0 ) {
-                                    Toast.makeText(getApplicationContext(), R.string.address_updated, Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), R.string.address_created, Toast.LENGTH_LONG).show();
-                                }
-
-
-                                try {
-                                    addressId = response.getInt("id");
-                                } catch (JSONException e) {
-                                    throw new RuntimeException(e);
-                                }
-
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                                editor.putInt("user_address", addressId);
-                                editor.apply();
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            if (addressId != 0) {
+                                Toast.makeText(getApplicationContext(), R.string.address_updated, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), R.string.address_created, Toast.LENGTH_LONG).show();
                             }
 
-                            @Override
-                            public void onError(ANError anError) {
-                                Toast.makeText(getApplicationContext(), R.string.global_something_went_wrong, Toast.LENGTH_LONG).show();
+
+                            try {
+                                addressId = response.getInt("id");
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
                             }
-                        });
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                            editor.putInt("user_address", addressId);
+                            editor.apply();
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), R.string.global_something_went_wrong, Toast.LENGTH_LONG).show();
+                        }
+                    });
         }
     }
 }
