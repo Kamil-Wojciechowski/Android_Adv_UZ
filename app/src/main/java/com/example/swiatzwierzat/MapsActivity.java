@@ -14,7 +14,7 @@ import com.example.swiatzwierzat.databinding.ActivityMapsBinding;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    public GoogleMap mMap;
     private ActivityMapsBinding binding;
 
     @Override
