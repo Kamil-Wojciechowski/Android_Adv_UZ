@@ -2,6 +2,9 @@ package com.example.swiatzwierzat.configuration;
 
 import android.content.SharedPreferences;
 
+/*
+Konfiguracja serwera backend
+ */
 public class BackendConfig {
     private static String url = "https://app-web-uz.herokuapp.com/api/v1";
     private static String token = "";

@@ -39,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
+    /**
+     * Zczytanie elementów z shared preferences
+     * takich jak np. "token, refreshToken, loginEmail"
+     */
     private void readSharedPreferences() {
         Context context = this.getApplicationContext();
 
@@ -53,6 +57,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Inicjalizacja wszystkich przycisków, Zczytanie zapisanych ustawień z SharedPreferences
+     * Ustawienie night mode wartości.
+     */
     private void initializer(Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
 
@@ -68,6 +76,13 @@ public class LoginActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(sharedPreferences.getInt("NightMode", AppCompatDelegate.MODE_NIGHT_NO));
     }
 
+    /**
+     * Inizjalizacja aktywności.
+     * Zapytanie o pozwolnie dla notyfikacji.
+     * Skorzystanie z initializera.
+     * Przypisanie funkcji do przycisków.
+     * Rozpoczęcie czasowych notyfikacji.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +98,9 @@ public class LoginActivity extends AppCompatActivity {
         LibNotifications.startPeriodicalNotifications(this);
     }
 
+    /**
+     * Po otworzeniu (nie zamkniętej całkowicie) aplikacji sprawdzany jest dostęp poprzez biomterię
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -92,6 +110,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Implementacja metody dla przycisku "Login"
+     * Tworzone jest zapytanie do serwera backend w celu pobrania danych autoryzacyjnych użytkownika.
+     * Zapisywane są one do obiektu statycznego. W przypadku braku powodzenia jest wyświetlana odpowiednia notyfikacja.
+     */
     private void onLogin(View v) {
         AndroidNetworking.post(BackendConfig.getUrl() + "/login")
                 .addBodyParameter("email", inEmail.getText().toString())
@@ -130,10 +153,18 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Metoda dla przypisania logiki dla biometryki
+     */
     private void onBiometricLogin(View v) {
         this.handleBiometricLogin();
     }
 
+    /**
+     * Logika, której zadaniem jest autoryzacja użytkownika za pomoca biometri.
+     * W przypadku gdy uda się użytkownikowi zalogować za pomocą biometri,
+     * wywoływany jest request do serwera backend w celu pobrania nowego tokenu na podstawie "refresh_tokena"
+     */
     private void handleBiometricLogin() {
         this.toggleButtons(false, false);
         LibBiometrics.showBiometricsDialog(this, R.string.fingerprint_login_title, R.string.fingerprint_login_description, new BiometricPrompt.AuthenticationCallback() {
@@ -182,6 +213,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     * Metody onRegister oraz onForget rozpoczynają nowe aktywności
+     */
     private void onRegister(View v) {
         startActivity(new Intent(v.getContext(), RegisterActivity.class));
     }
@@ -190,6 +225,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(v.getContext(), ForgetPasswordActivity.class));
     }
 
+    /**
+     * Funkcja odpowiendnio zarządza przyciskami oraz możliwościami
+     */
     private void toggleButtons(boolean isFingerprintEnabled, boolean isEnabled) {
         fingerprintButton.setEnabled(isFingerprintEnabled);
         forgetButton.setEnabled(isEnabled);

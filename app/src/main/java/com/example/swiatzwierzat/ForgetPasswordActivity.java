@@ -30,6 +30,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     private BackendConfig backendConfig;
 
+    /**
+     * Zczytanie preferenecji użytkownika oraz uzupełnienie email'a jeśli takowy istnieje.
+     */
     private void readSharedPreferences() {
         Context context = this.getApplicationContext();
 
@@ -38,6 +41,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         inEmail.setText(sharedPreferences.getString("loginEmail", ""));
     }
 
+    /**
+     * Inicjalizacja elementów z aktywności
+     */
     private void initializer(Bundle savedInstanceState) {
         setContentView(R.layout.activity_forget_password);
 
@@ -48,6 +54,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         readSharedPreferences();
     }
 
+    /**
+     * Inicjalizacja aktywności oraz przypisanie funkcjonalności do przycisków
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +66,16 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         send.setOnClickListener(this::onSend);
     }
 
+    /**
+     * cofniecie do poprzedniej aktywności
+     */
     private void onBack(View v) {
         onBackPressed();
     }
 
+    /**
+     * Walidacja pola
+     */
     private boolean isFieldsValid() {
         Boolean isValid = true;
 
@@ -75,6 +90,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         return isValid;
     }
 
+    /**
+     * Po zwalidowaniu pól, zostaje wykonane zapytanie do serwera backend w celu zresetowania hasła danemu użytkownikowi
+     */
     private void onSend(View v) {
         if(isFieldsValid()) {
             AndroidNetworking.post(backendConfig.getUrl() + "/recovery/" + inEmail.getText().toString())

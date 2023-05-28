@@ -6,6 +6,9 @@ import android.content.Intent;
 
 import com.example.swiatzwierzat.library.LibNotifications;
 
+/*
+Klasa odpowiadająca za powiadomienia.
+ */
 public class NotificationBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

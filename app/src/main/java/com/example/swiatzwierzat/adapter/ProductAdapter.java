@@ -14,6 +14,10 @@ import com.example.swiatzwierzat.model.Product;
 
 import java.util.List;
 
+/*
+Adaptery mają za zadanie wyświetlić odpowiednio produklty w ListView.
+
+ */
 public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
     private List<Product> productList;

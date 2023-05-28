@@ -49,6 +49,13 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private JSONArray shoppingCartInternal = new JSONArray();
 
+    /*
+    Inicjalizuje cały obiekt.
+    1. Pobiera wysłane elementy z Intenta na temat produktu
+    2. Przypisuje elementy do zmiennych
+    3. Przypisuje funkcjonalności do przycisków
+    4. pobiera informacje na temat aktualnego koszyka
+     */
     private void initializer() {
         setContentView(R.layout.activity_product_detail);
 
@@ -103,6 +110,9 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
+    /*
+    Wstawia wszystkie informacje do pól nt. produktu
+     */
     private void putData() {
         productName.setText(product.getName());
         description.setText(product.getDescription());
@@ -116,6 +126,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         productImage.setImageBitmap(decodedBytes);
     }
 
+    /*
+    Logika odpowiadająca za  wstawienie dodatkowego produktu (lub pierwszego) do koszyka
+     */
     private void onBuy(View v) {
         Boolean found = false;
         for (int i = 0; i < shoppingCartInternal.length(); i++) {
@@ -155,6 +168,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         shoppingCart.setValue(shoppingCartInternal.toString());
     }
 
+    /*
+    Zbudowanie aktyuwności
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

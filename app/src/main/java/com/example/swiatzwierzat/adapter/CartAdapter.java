@@ -26,6 +26,10 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/*
+Adaptery mają za zadanie wyświetlić odpowiednio produklty w ListView.
+
+ */
 public class CartAdapter extends ArrayAdapter<ItemCart> {
     private Context context;
     private List<ItemCart> cartList;
@@ -34,6 +38,9 @@ public class CartAdapter extends ArrayAdapter<ItemCart> {
     private DatabaseReference shoppingCart;
     private SharedPreferences sharedPreferences;
 
+    /*
+    Konstruktor tworzy element, pobiera dane z sharedPreferences nt. koszyka
+     */
     public CartAdapter(Context context, List<ItemCart> cartList) {
         super(context, 0, cartList);
         this.context = context;
@@ -47,6 +54,10 @@ public class CartAdapter extends ArrayAdapter<ItemCart> {
         shoppingCart = database.getReference(email + "_shopping_cart");
     }
 
+    /*
+    getView ma za zadanie zainicjalizować widok dla pojędyńczego elementu.
+    oraz przypisuje funkcjonalności dla przycisków
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View listItem = convertView;
@@ -107,6 +118,9 @@ public class CartAdapter extends ArrayAdapter<ItemCart> {
         return listItem;
     }
 
+    /*
+    Metoda mająca za zadanie zaaktualizowanie koszyka po stronie firebase.
+     */
     private void updateFirebase() {
         JSONArray items = new JSONArray();
 

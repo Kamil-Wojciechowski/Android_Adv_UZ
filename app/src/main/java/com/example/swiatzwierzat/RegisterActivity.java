@@ -28,7 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
     private Button backButton;
     private Button registerButton;
 
-
+    /**
+     * Inicjalizer wszystkich elementów które znajdują się na aktywności
+     */
     private void initializer(Bundle savedInstanceState) {
         setContentView(R.layout.activity_register);
 
@@ -42,6 +44,10 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.bt_register_register);
     }
 
+    /**
+     * Inicjalizuje aktywność oraz ustawia odpowiednie funkcji na przyciskach
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +57,16 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(this::onRegister);
     }
 
+    /**
+     * Cofanie do poprzednej aktywności
+     */
     private void onBack(View v) {
         onBackPressed();
     }
 
+    /**
+     * Walidacja pól
+     */
     private boolean isFieldsValid() {
         boolean isValid = true;
 
@@ -93,6 +105,9 @@ public class RegisterActivity extends AppCompatActivity {
         return isValid;
     }
 
+    /**
+     * W przypadku gdy pola zostały odpowiednio uzupełnione, wykonywane jest zapytanie do serwera backend w celu utworzenia konta.
+     */
     private void onRegister(View v) {
         boolean isValid = isFieldsValid();
 

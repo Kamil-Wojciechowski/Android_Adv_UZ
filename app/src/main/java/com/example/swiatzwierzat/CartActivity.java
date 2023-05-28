@@ -45,6 +45,11 @@ public class CartActivity extends AppCompatActivity {
 
     private BackendConfig backendConfig;
 
+    /*
+    Inicjalizacja wszystkich komponentów,
+    Przypisanie przyciskó oraz funkcjonalności
+    Pobranie danych nt. Koszyka
+     */
     private void initializer() {
         setContentView(R.layout.activity_cart);
 
@@ -95,10 +100,13 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    Po naciśnieciu przycisku sprawdzane czy jest podany adres, jeśli tak składane jest zamówienie z wykorzystaniem usługi backend
+     */
     private void onBuy(View view) {
         Integer addressId = sharedPreferences.getInt("user_address", 0);
         if(addressId == 0) {
-            Toast.makeText(getApplicationContext(), R.string.provide_address, Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), R.string.provide_address, Toast.LENGTH_LONG).show();
             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         }
 
@@ -140,6 +148,9 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    Logika odpowiadająca za dodanie kolejnego elementu zamówienia - Logika która znajduje się po stronie backend tego wymaga
+     */
     private void addItemsToOrder(Integer orderId) throws JSONException {
         for(ItemCart item : itemCarts) {
 

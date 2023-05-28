@@ -43,6 +43,9 @@ public class SettingsActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
 
+    /*
+    Metoda mająca na celu pobranie aktualnego adresu użytkownika
+     */
     private void loadAddress() {
         AndroidNetworking.get(BackendConfig.getUrl() + "/addresses").addHeaders("Authorization", BackendConfig.getToken()).build().getAsJSONArray(new JSONArrayRequestListener() {
             @Override
@@ -70,12 +73,18 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    Aktualizuje informację na temat id adresu
+     */
     private void updateAddressId() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("user_address", addressId);
         editor.apply();
     }
 
+    /*
+    Rozpoczęcie przypisywania elementów do zmiennych, funkcjonalności do przycisków.
+     */
     private void initializer() {
         setContentView(R.layout.activity_settings);
 
@@ -96,6 +105,10 @@ public class SettingsActivity extends AppCompatActivity {
         switch1.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
     }
 
+
+    /*
+    Walidacja informacji nt. danych adresowych
+     */
     private boolean isFieldsValid() {
         boolean isValid = true;
 
@@ -143,6 +156,9 @@ public class SettingsActivity extends AppCompatActivity {
         return isValid;
     }
 
+    /*
+    Załadowanie aktywności
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +166,9 @@ public class SettingsActivity extends AppCompatActivity {
         initializer();
     }
 
+    /*
+    Zmiana trybu z nocnego na dzienny i na odwrot
+     */
     private void changeTheme(View view) {
         int nightMode = switch1.isChecked() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
         AppCompatDelegate.setDefaultNightMode(nightMode);
@@ -159,6 +178,9 @@ public class SettingsActivity extends AppCompatActivity {
         preferences.apply();
     }
 
+    /*
+        Dodanie lub aktualizacja adresu po naciśnięciu przycisku gdy dane są poprawne
+     */
     private void save(View view) {
         if (isFieldsValid()) {
             JSONObject address;

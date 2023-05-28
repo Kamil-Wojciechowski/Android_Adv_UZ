@@ -49,6 +49,13 @@ public class ProductsActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
+    /*
+    Inicjalizuje wszystkie potrzebne elementy.
+    1. Sprawdza czy użytkownik posiada przypisany adres.
+    2. Inicjalizuje wszystkie elementy z aktywności do klasy
+    3. Przypisuje funkcjonalności do przycisków
+    4. Inicjalizuje reklamy
+     */
     private void initializer(Bundle savedInstanceState) {
         sharedPreferences = getApplicationContext().getSharedPreferences(BackendConfig.getSharedPreferenceName(), Context.MODE_PRIVATE);
         if (sharedPreferences.getInt("user_address", 0) == 0) {
@@ -84,6 +91,9 @@ public class ProductsActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
     }
 
+    /*
+    Inicjalizuje elementy na aktywności, pobiera produkty oraz je wyświetla
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +104,9 @@ public class ProductsActivity extends AppCompatActivity {
         loadProductsToGrid();
     }
 
+    /*
+    Tworzy zaptranie backend po to aby pobrać produkty. Gdy się uda zapisuje je do Firebase.
+     */
     private void getProducts() {
         AndroidNetworking.get(BackendConfig.getUrl() + "/products")
                 .build()
@@ -113,6 +126,10 @@ public class ProductsActivity extends AppCompatActivity {
                 });
     }
 
+    /*
+    Nasłuchuje czy zostały zmienione produkty w firebase, jeśli tak
+    wyświetla je odpowiednio wykorzystując productAdapter.
+     */
     private void loadProductsToGrid() {
         products.addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,6 +170,11 @@ public class ProductsActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    toSettings - rozpoczyna aktywność ustawień
+    toCart - rozpoczyna aktywność koszyka
+    toMaps - rozpoczyna aktywność mapy
+     */
     private void toSettings(View v) {
         startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
     }
