@@ -2,23 +2,24 @@ package com.example.swiatzwierzat;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Method;
 import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.swiatzwierzat.configuration.BackendConfig;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,43 +38,42 @@ public class SettingsActivity extends AppCompatActivity {
 
     private Button save;
 
-    private Switch switch1;
+    private SwitchCompat switch1;
 
     private SharedPreferences sharedPreferences;
 
 
     private void loadAddress() {
-        addressId = sharedPreferences.getInt("user_address", 0);
+        AndroidNetworking.get(BackendConfig.getUrl() + "/addresses").addHeaders("Authorization", BackendConfig.getToken()).build().getAsJSONArray(new JSONArrayRequestListener() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONObject lastAddress = response.getJSONObject(response.length() - 1);
+                    inFirstname.setText(lastAddress.getString("firstname"));
+                    inLastname.setText(lastAddress.getString("lastname"));
+                    inMobilePhone.setText(lastAddress.getString("mobileNumber"));
+                    inStreet.setText(lastAddress.getString("street"));
+                    inCity.setText(lastAddress.getString("city"));
+                    inPostalCode.setText(lastAddress.getString("postalCode"));
+                    addressId = lastAddress.getInt("id");
+                    updateAddressId();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
-        if (addressId != 0) {
-            AndroidNetworking.get(BackendConfig.getUrl() + "/addresses/" + addressId)
-                    .addHeaders("Authorization", BackendConfig.getToken())
-                    .build()
-                    .getAsJSONObject(new JSONObjectRequestListener() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                inFirstname.setText(response.getString("firstname"));
-                                inLastname.setText(response.getString("lastname"));
-                                inMobilePhone.setText(response.getString("mobileNumber"));
-                                inStreet.setText(response.getString("street"));
-                                inCity.setText(response.getString("city"));
-                                inPostalCode.setText(response.getString("postalCode"));
-                            } catch (JSONException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
+            @Override
+            public void onError(ANError anError) {
+                addressId = 0;
+                updateAddressId();
+            }
+        });
+    }
 
-                        @Override
-                        public void onError(ANError anError) {
-                            addressId = 0;
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putInt("user_address", addressId);
-                            editor.apply();
-                        }
-                    });
-        }
-
+    private void updateAddressId() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("user_address", addressId);
+        editor.apply();
     }
 
     private void initializer() {
@@ -93,6 +93,7 @@ public class SettingsActivity extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences(BackendConfig.getSharedPreferenceName(), Context.MODE_PRIVATE);
 
         loadAddress();
+        switch1.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     private boolean isFieldsValid() {
@@ -150,13 +151,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void changeTheme(View view) {
-        if (!switch1.isChecked()) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        int nightMode = switch1.isChecked() ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
+        AppCompatDelegate.setDefaultNightMode(nightMode);
 
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-        }
+        SharedPreferences.Editor preferences = sharedPreferences.edit();
+        preferences.putInt("NightMode", nightMode);
+        preferences.apply();
     }
 
     private void save(View view) {

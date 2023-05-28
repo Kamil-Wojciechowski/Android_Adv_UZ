@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.biometric.BiometricPrompt;
 
 import com.androidnetworking.AndroidNetworking;
@@ -64,11 +65,13 @@ public class LoginActivity extends AppCompatActivity {
         fingerprintButton = findViewById(R.id.bt_login_fingerprint);
 
         readSharedPreferences();
+        AppCompatDelegate.setDefaultNightMode(sharedPreferences.getInt("NightMode", AppCompatDelegate.MODE_NIGHT_NO));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         LibNotifications.askForNotificationPermissions(this);
         initializer(savedInstanceState);
 
@@ -86,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
 
         if (credentialsSaved && LibBiometrics.canUseBiometrics(this)) {
             fingerprintButton.setVisibility(View.VISIBLE);
-            this.handleBiometricLogin();
         }
     }
 

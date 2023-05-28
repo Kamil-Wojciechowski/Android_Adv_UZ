@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -49,9 +48,10 @@ public class ProductsActivity extends AppCompatActivity {
     private List<Product> productsArr;
 
     private SharedPreferences sharedPreferences;
+
     private void initializer(Bundle savedInstanceState) {
         sharedPreferences = getApplicationContext().getSharedPreferences(BackendConfig.getSharedPreferenceName(), Context.MODE_PRIVATE);
-        if(sharedPreferences.getInt("user_address", 0) == 0) {
+        if (sharedPreferences.getInt("user_address", 0) == 0) {
             Toast.makeText(getApplicationContext(), R.string.provide_address, Toast.LENGTH_LONG).show();
             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
         }
@@ -117,12 +117,12 @@ public class ProductsActivity extends AppCompatActivity {
         products.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                   String value = dataSnapshot.getValue(String.class);
-                    productsArr = new ArrayList<>();
+                String value = dataSnapshot.getValue(String.class);
+                productsArr = new ArrayList<>();
 
                 try {
                     JSONArray products = new JSONArray(value);
-                    for(int i = 0; i < products.length(); i++) {
+                    for (int i = 0; i < products.length(); i++) {
                         JSONObject product = products.getJSONObject(i);
 
                         productsArr.add(
@@ -144,10 +144,11 @@ public class ProductsActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.w("com.example.swiatzwierzat.firebase", "Failed to read value.", error.toException());
-                Toast.makeText(getApplicationContext() ,R.string.global_something_went_wrong, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.global_something_went_wrong, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -162,5 +163,10 @@ public class ProductsActivity extends AppCompatActivity {
 
     private void toMaps(View v) {
         startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Zabezpieczenie przed powrotem na ekran logowania
     }
 }
