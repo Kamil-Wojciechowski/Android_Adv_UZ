@@ -31,7 +31,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private BackendConfig backendConfig;
 
     /**
-     * Zczytanie preferenecji użytkownika oraz uzupełnienie email'a jeśli takowy istnieje.
+     * Zczytanie preferencji użytkownika oraz uzupełnienie email'a jeśli takowy istnieje.
      */
     private void readSharedPreferences() {
         Context context = this.getApplicationContext();

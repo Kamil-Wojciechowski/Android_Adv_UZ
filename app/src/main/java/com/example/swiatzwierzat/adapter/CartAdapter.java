@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 /*
-Adaptery mają za zadanie wyświetlić odpowiednio produklty w ListView.
+Adaptery mają za zadanie wyświetlić odpowiednio produkty w ListView.
 
  */
 public class CartAdapter extends ArrayAdapter<ItemCart> {
@@ -55,7 +55,7 @@ public class CartAdapter extends ArrayAdapter<ItemCart> {
     }
 
     /*
-    getView ma za zadanie zainicjalizować widok dla pojędyńczego elementu.
+    getView ma za zadanie zainicjalizować widok dla pojedynczego elementu.
     oraz przypisuje funkcjonalności dla przycisków
      */
     @Override
@@ -119,7 +119,7 @@ public class CartAdapter extends ArrayAdapter<ItemCart> {
     }
 
     /*
-    Metoda mająca za zadanie zaaktualizowanie koszyka po stronie firebase.
+    Metoda mająca za zadanie zaktualizowanie koszyka po stronie firebase.
      */
     private void updateFirebase() {
         JSONArray items = new JSONArray();

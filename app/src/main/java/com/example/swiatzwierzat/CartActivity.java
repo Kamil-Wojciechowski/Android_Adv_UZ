@@ -47,7 +47,7 @@ public class CartActivity extends AppCompatActivity {
 
     /*
     Inicjalizacja wszystkich komponentów,
-    Przypisanie przyciskó oraz funkcjonalności
+    Przypisanie przycisków oraz funkcjonalności
     Pobranie danych nt. Koszyka
      */
     private void initializer() {

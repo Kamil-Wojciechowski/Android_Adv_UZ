@@ -169,7 +169,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     /*
-    Zbudowanie aktyuwności
+    Zbudowanie aktywności
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

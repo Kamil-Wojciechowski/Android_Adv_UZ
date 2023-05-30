@@ -15,7 +15,7 @@ import com.example.swiatzwierzat.model.Product;
 import java.util.List;
 
 /*
-Adaptery mają za zadanie wyświetlić odpowiednio produklty w ListView.
+Adaptery mają za zadanie wyświetlić odpowiednio produkty w ListView.
 
  */
 public class ProductAdapter extends ArrayAdapter<Product> {

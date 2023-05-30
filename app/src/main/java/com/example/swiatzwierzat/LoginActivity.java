@@ -77,8 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Inizjalizacja aktywności.
-     * Zapytanie o pozwolnie dla notyfikacji.
+     * Inicjalizacja aktywności.
+     * Zapytanie o pozwolenie dla notyfikacji.
      * Skorzystanie z initializera.
      * Przypisanie funkcji do przycisków.
      * Rozpoczęcie czasowych notyfikacji.
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Po otworzeniu (nie zamkniętej całkowicie) aplikacji sprawdzany jest dostęp poprzez biomterię
+     * Po otworzeniu (nie zamkniętej całkowicie) aplikacji sprawdzany jest dostęp poprzez biometrię
      */
     @Override
     protected void onResume() {

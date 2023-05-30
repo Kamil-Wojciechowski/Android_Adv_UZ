@@ -105,7 +105,7 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     /*
-    Tworzy zaptranie backend po to aby pobrać produkty. Gdy się uda zapisuje je do Firebase.
+    Tworzy zapytanie backend po to aby pobrać produkty. Gdy się uda zapisuje je do Firebase.
      */
     private void getProducts() {
         AndroidNetworking.get(BackendConfig.getUrl() + "/products")
